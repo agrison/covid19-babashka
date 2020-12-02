@@ -1,8 +1,5 @@
 #!/usr/local/bin/bb
-(require '[clojure.java.shell :refer [sh]]
-         '[babashka.curl :as curl]
-         '[clojure.java.io :as io]
-         '[table.core :as t]
+(require '[table.core :as t]
          '[clojure.tools.cli :as cli])
 
 (def cli-options
@@ -21,7 +18,7 @@
 
 (defn graph [d title]
   (let [data (apply str (interpose " " d))
-        graph (:out (sh "asciigraph" "-h" "10" "-c" title :in data))]
+        graph (:out (shell/sh "asciigraph" "-h" "10" "-c" title :in data))]
     (println graph)))
 
 (defn graph-values [m]
